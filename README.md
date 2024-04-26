@@ -1,2 +1,2 @@
 # Javascript
-Documentacion y ejercicicios de Javascript
+Documentacion y ejercicios de Javascript
