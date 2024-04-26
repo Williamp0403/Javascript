@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos con mouse</title>
+</head>
+<body>
+  <h1>Eventos con mouse</h1>
+  <div id="div1" style="width: 350px; height: 350px;">
+    <img src="https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" width="200px" height="200px" onmouseenter="makeBig(this)" onmouseleave="makeSmall(this)">
+  </div>
+</body>
+<script>
+  function makeBig(element) {
+    // element.style.width = '300px';
+    // element.style.height = '300px';
+    element.src = "https://i.stack.imgur.com/7gtol.gif"
+  }
+
+  function makeSmall(element) {
+    // element.style.width = '200px';
+    // element.style.height = '200px';
+    element.src = "https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif"
+  }
+</script>
+<script src="./JS/index.js"></script>
+</html>

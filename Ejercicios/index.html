@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Cajero Automatico</title>
+</head>
+
+<body class="bg-slate-900">
+  <section class="mt-8 bg-gray-200 max-w-lg mx-auto rounded-md p-4">
+    <h1 class="text-center text-2xl">Cajero Automatico</h1>
+  </section>
+
+  <section id="login" class="mt-8 bg-gray-200 max-w-lg mx-auto rounded-md flex justify-center" >
+    <form class="flex flex-col space-y-6 w-full max-w-screen-sm mt-6" onsubmit= "return false">
+      <input type="number" placeholder="Numero de Tarjeta" id="CardNumber" class="border-2 border-gray-300 hover:border-gray-700 p-6">
+      <input type="password" placeholder="Clave" id="password" class="border-2 border-gray-300 hover:border-gray-700 p-6">
+      <input type="submit" value="Iniciar" onclick="ConfirmDate()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-4 rounded">
+    </form>
+  </section>
+
+
+  <section id="menu" style="display: none;">
+
+    <div id="username" class="flex mt-8 mx-auto max-w-lg bg-gray-200 rounded-md p-5 text-xl text-center outline outline-offset-2 outline-blue-500">
+    </div>
+    
+   
+    <div class="flex flex-col space-y-4 mt-8 mx-auto max-w-lg bg-gray-200 rounded-md p-7 outline outline-offset-2 outline-blue-500">
+      <div id="amount" class="flex flex-col space-y-4 max-w-lg bg-gray-200 rounded-md p-5 text-xl text-center hover:outline hover:outline-offset-2 hover:outline-blue-500">
+      </div>
+      <div onclick="depositAmount()" id="button_depositar_dinero" class="bg-blue-500 hover:bg-blue-400 rounded-md p-5 text-white text-center text-xl outline hover:outline-offset-2 hover:outline-blue-500">
+        <button>Depositar Dinero </button>
+      </div>
+      <div onclick="withdrawMoney()" id="button_retirar_dinero" class="bg-blue-500 hover:bg-blue-400 rounded-md p-5 text-white text-center text-xl outline hover:outline-offset-2 hover:outline-blue-500"> 
+        <button>Retirar Dinero</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="depositAmount" style="display: none;">
+    <div class="flex flex-col space-y-4 mt-8 mx-auto max-w-lg bg-gray-200 rounded-md py-7 outline outline-offset-2 outline-blue-500">
+      <h2 class="flex justify-center text-xl">Ingrese la cantidad a depositar</h2>
+      <form class="flex flex-col space-y-4 mt-8 w-full max-w-lg " onsubmit= "return false">
+        <input class="p-6 border-2 border-gray-300 hover:border-gray-700" id="cantidadDeposito" type="number" placeholder="Cantidad">
+        <div class="flex justify-around">
+          <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-32 h-14 rounded" onclick="depositoasumar()" type="submit" value="Depositar">
+          <input class="bg-slate-600 hover:bg-slate-500 text-white font-bold w-32 h-14 rounded" onclick="backToMenuDeposit()" type="submit" value="Volver">
+        </div>
+     </form>
+    </div>
+
+  </section>
+
+  <section id="withdrawMoney" style="display: none;">
+    <div class="flex flex-col space-y-4 mt-8 mx-auto max-w-lg bg-gray-200 rounded-md py-7 outline outline-offset-2 outline-blue-500">
+      <h2 class="flex justify-center text-xl">Ingrese la cantidad a retirar</h2>
+      <form class="flex flex-col space-y-4 mt-8 w-full max-w-lg " onsubmit= "return false">
+        <input class="p-6 border-2 border-gray-300 hover:border-gray-700" id="cantidadRetirar" type="number" placeholder="Cantidad">
+        <div class="flex justify-around">
+          <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-32 h-14 rounded" onclick="mountToBeWithdrawn()" type="submit" value="Retirar">
+          <input class="bg-slate-600 hover:bg-slate-500 text-white font-bold w-32 h-14 rounded" onclick="backToMenuWihdrawn()" type="submit" value="Volver">
+        </div>
+     </form>
+    </div>
+
+  </section>
+</body>
+
+<script>
+    accounts = [
+    {
+      name: "William",
+      lastName: "Pinto",
+      card_number: 5423,
+      password: 8214,
+      amount: 1500
+    },
+    {
+      name: "Maria",
+      lastName: "Rodriguez",
+      card_number: 5678,
+      password: 5678,
+      amount: 800
+    },
+    {
+      name: "Jhon",
+      lastName: "Molina",
+      card_number: 9101,
+      password: 9101,
+      amount: 1200
+    },
+    {
+      name: "Miguel",
+      lastName: "Petit",
+      card_number: 1224,
+      password: 5312,
+      amount: 2000
+    },
+    {
+      name: "Ana",
+      lastName: "Gomez",
+      card_number: 1234,
+      password: 1234,
+      amount: 5000
+    }
+  ]
+  var getCard;
+
+  function ConfirmDate() {
+    let CardNumber = document.getElementById("CardNumber").value;
+    let password = document.getElementById("password").value;
+
+    for (let i = 0; i < accounts.length; i++) {
+      if (accounts[i].card_number == CardNumber) {
+        getCard = accounts[i];
+        console.log(getCard)
+        break;
+      }
+    }
+
+    if(getCard === undefined) {
+      alert('Tarjeta no encontrada');
+      return;
+    } else {
+      if(getCard.password == password && getCard.card_number == CardNumber) {
+        alert('Bienvenido');
+        document.getElementById('login').style.display = 'none';
+        UsernameSection = document.getElementById('username');
+        UsernameSection.innerHTML = `<h2>Bienvenido ${getCard.name} ${getCard.lastName}</h2>`;
+        AmountSection = document.getElementById('amount')
+        AmountSection.innerHTML = `<h2>Saldo Disponible ${getCard.amount}$</h2>`
+        document.getElementById('menu').style.display = 'block';
+      } else {
+        alert('Clave incorrecta');
+      }
+    }
+  }
+
+  function depositAmount() {
+    document.getElementById('depositAmount').style.display = 'block';
+    document.getElementById('button_depositar_dinero').style.display = 'none';
+    document.getElementById('button_retirar_dinero').style.display = 'none';
+    
+  }
+
+  function depositoasumar() {
+    cantidadDeDeposito = document.getElementById('cantidadDeposito').value;
+    if (cantidadDeDeposito > 0) {
+    getCard.amount += parseInt(cantidadDeDeposito);
+    let amountSection = document.getElementById('amount');
+    AmountSection.innerHTML = `<h2>Saldo Disponible ${getCard.amount}$</h2>` 
+    } else {
+      alert('Ingrese una cantidad real');
+    }
+  }
+  function backToMenuDeposit() {
+    document.getElementById('depositAmount').style.display = 'none';
+    document.getElementById('button_depositar_dinero').style.display = 'block';
+    document.getElementById('button_retirar_dinero').style.display = 'block';
+  }
+
+  function withdrawMoney() {
+    document.getElementById('withdrawMoney').style.display = 'block';
+    document.getElementById('button_depositar_dinero').style.display = 'none';
+    document.getElementById('button_retirar_dinero').style.display = 'none';    
+  }
+
+  function mountToBeWithdrawn() {
+    cantidadDeRetiro = document.getElementById('cantidadRetirar').value;
+    getCard.amount -= parseInt(cantidadDeRetiro);
+    let amountSection = document.getElementById('amount');
+    AmountSection.innerHTML = `<h2>Saldo Disponible ${getCard.amount}$</h2>`
+  }
+
+  function backToMenuWihdrawn() {
+    document.getElementById('withdrawMoney').style.display = 'none';
+    document.getElementById('button_depositar_dinero').style.display = 'block';
+    document.getElementById('button_retirar_dinero').style.display = 'block';
+
+  }
+
+</script>
+</html>

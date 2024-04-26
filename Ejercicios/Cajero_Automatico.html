@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Cajero Automatico</title>
+</head>
+<body>
+  <section id="title" class="text-center mt-8">
+    <h1 class="text-2xl">Cajero Automatico</h1>
+  </section>
+
+  <section id="login" class="flex justify-center">
+    <form action="" class="flex justify-center mt-8 flex-col space-y-4  w-full max-w-80" onsubmit=" return false">
+      <input type="number" placeholder="Numero de Tarjeta" id="card_number" class="border-2 border-gray-300 p-4">
+      <input type="password" placeholder="Clave" id="password" class="border-2 border-gray-300 p-4">
+      <input type="submit" value="Iniciar" onclick="validateData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    </form>
+  </section>
+
+  <section id="menu" style="display: none;">
+    <div class="flex justify-center space-x-4 mt-8">
+      <button onclick="checkAmount()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Consultar Saldo</button>
+      <button onclick="withdrawAmount()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Retirar Dinero</button>
+      <button onclick="depositAmount()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Depositar Dinero</button>
+    </div>
+  </section>
+
+  <section id="amount" class="text-center mt-8" style="display: none;">
+  </section>
+
+  <section id="withdrawOptions" class="flex flex-col align-middle justify-center mt-8 items-center" style="display: none;">
+    <h2 class="text-2xl m-4">Selecciona la cantidad a retirar</h2>
+    <div class="flex flex-col justify-center space-y-4 w-full max-w-80">
+      <button onclick="withdraw('5')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">5</button>
+      <button onclick="withdraw('10')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">10</button>
+      <button onclick="withdraw('20')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">10</button>
+      <button onclick="withdraw('50')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">50</button>
+      <button onclick="withdraw('100')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">100</button>
+    </div>
+  </section>
+
+  <section id="depositOptions" class="flex flex-col align-middle justify-center mt-8 items-center" style="display: none;">
+    <h2 class="text-2xl m-4">Selecciona la cantidad a depositar</h2>
+    <div class="flex flex-col justify-center space-y-4 w-full max-w-80">
+      <form onSubmit="return false">
+        <input type="number" id="deposit_input" placeholder="Cantidad a depositar" class="border-2 border-gray-300 p-4">
+        <input type="submit" onclick="deposit()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      </form>
+    </div>
+  </section>
+</body>
+<script>
+  accounts = [
+    {
+      card_number: 1234,
+      password: 1234,
+      amount: 1500
+    },
+    {
+      card_number: 5678,
+      password: 5678,
+      amount: 800
+    },
+    {
+      card_number: 9101,
+      password: 9101,
+      amount: 1200
+    }
+  ]
+
+  var getCard
+
+  function validateData() {
+    let card_number = document.getElementById('card_number').value;
+    let password = document.getElementById('password').value;
+
+    for (let i = 0; i < accounts.length; i++) {
+      if (accounts[i].card_number == card_number) {
+        getCard = accounts[i];
+        break;
+      }
+    }
+
+    if(getCard === undefined) {
+      alert('Tarjeta no encontrada');
+      return;
+    } else {
+      if(getCard.password == password) {
+        alert('Bienvenido');
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('menu').style.display = 'block';
+      } else {
+        alert('Clave incorrecta');
+      }
+    }
+  }
+
+  function checkAmount() {
+    console.log('Consultar saldo', getCard);
+    amountSection = document.getElementById('amount');
+    amountSection.innerHTML = `<h2>Tu saldo es de ${getCard.amount}</h2>`;
+    amountSection.style.display = 'block';
+  }
+
+  function withdrawAmount() {
+    console.log('Retirar dinero', getCard);
+    document.getElementById('withdrawOptions').style.display = 'block'
+  }
+
+  function withdraw(amount) {
+    console.log('Retirar', amount);
+    getCard.amount -= parseInt(amount);
+    document.getElementById('withdrawOptions').style.display = 'none';
+    document.getElementById('amount').innerHTML = `<h2>Has retirado ${amount}, tu saldo es de ${getCard.amount}</h2>`;
+    amountSection.style.display = 'block';
+  }
+
+  function depositAmount(){
+    console.log('Depositar dinero', getCard);
+    document.getElementById('depositOptions').style.display = 'block'
+  }
+
+  function deposit(){
+    value = document.getElementById('deposit_input').value;
+    console.log('Depositar', value);
+    getCard.amount += parseInt(value);
+    let amountSection = document.getElementById('amount');
+    amountSection.innerHTML = `<h2>Has depositado ${value}, tu saldo es de ${getCard.amount}</h2>`;
+    amountSection.style.display = 'block';
+  }
+</script>
+</html>
