@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de cofla 2</title>
+</head>
+<body>
+<script>
+// Un joven muy afortunado logro ganar el primer premio de la loteria... exacto, estamos hablando del pobre la que cofla le dio una mano, este pobre decide hacer una fiesta para festejar que salio de la pobreza con este millonario compro una maquina que deja pasasr solamente a los mayores de edad, entre otras cosas...
+
+// - Dejar pasar solo a los mayores de edad
+// - La primera persona que entre despues de las 2 AM, no paga
+
+var gratis = true;
+const determinarPachanguero = (tiempo)=> {
+    let edad = parseInt(prompt("Que edad tienes?"));
+    if(edad >= 18) {
+        if(tiempo >= 2 && tiempo < 7 && gratis) {
+            alert("Bienvenido a la fiesta y entras gratis por ser la primera persona en llegar despues de las 2 AM.");
+            gratis = false;
+        } else {
+            if(gratis == false && tiempo >= 2 && tiempo < 7) {
+                alert(`Bienvenido a la fiesta, puedes pasar, pero son las ${tiempo}:00 AM, y ya llego alguien primero que tu, asi que tienes que pagar.`);
+            } else {
+                alert(`Bienvenido a la fiesta, puedes pasar, pero son las ${tiempo}:00 AM, tienes que pagar entrada.`);
+            }
+        }
+    } else {
+        alert("Lo siento, los menores de edad no pasan");
+    }
+}
+
+determinarPachanguero(1);
+determinarPachanguero(12);
+determinarPachanguero(2);
+determinarPachanguero(2);
+determinarPachanguero(3);
+determinarPachanguero(12);
+determinarPachanguero(11);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO</title>
+</head>
+<body>
+    <style>
+        p{
+            font-size: 20px;
+        }
+    </style>
+<script>
+
+    class animal { // Se crea la clase animal
+        constructor(especie, edad, color){ // Se crea el constructor de la clase animal
+            this.especie = especie;
+            this.edad = edad;
+            this.color = color;
+            this.info = `Soy ${this.especie}, tengo ${this.edad} años y soy de color ${this.color}`;
+        }
+        verInfo() { // Se crea el metodo verInfo
+            document.write(this.info + "<br>");
+        }
+    }
+  
+    class Perro extends animal { // Se crea la clase Perro que heredara los atributos de la clase animal
+        constructor(especie, edad, color, raza, tamaño) {
+            super(especie, edad, color); // En el super se colocan los heredados de la clase animal
+            this.raza = raza; // Se le agrega el nuevp atributo unico de la clase Perro
+            this.tamaño = null;
+        }
+        ladrar() { // Se crea el metodo ladrar
+            document.write("WAW!!");
+        }
+        set setTamaño(newTamaño) { // Se crea el metodo setter para modificar un atributo
+            this.tamaño = newTamaño;
+        }
+        get getTamaño(){ // Se crea el metodo getter para obtener un atributo
+            return this.tamaño;
+        }
+    }
+
+    const perro = new animal("perro", 5, "negro"); // Se crea el objeto perro de la clase animal
+    const gato = new animal("gato", 3, "blanco"); // Se crea el objeto gato de la clase animal
+    const pajaro = new animal("pajaro", 1, "verde"); // Se crea el objeto pajaro de la clase animal
+    const dog = new Perro("perro", 4 , "marron", "Pitbull"); // Se crea el objeto dog de la clase Perro que hereda los atributos de animal
+
+    document.write(perro.info + "<br>");
+    document.write(gato.info + "<br>");
+    document.write(pajaro.info + "<br>");
+
+    document.write(`<p> <b>Mostrar la informacion mediante metodos:</b> </p>`);
+    perro.verInfo();
+    gato.verInfo();
+    pajaro.verInfo();
+
+    document.write(`<p> <b>Mostrar la informacion mediante herencia:</b> </p>`);
+    document.write(`Soy un ${dog.especie} con clases heredadas, tengo ${dog.edad} años, soy de color ${dog.color} y soy de raza ${dog.raza}!! <br>`);
+    dog.ladrar();
+    document.write(`<br>`);
+    dog.setTamaño = `1 metro!`;
+    document.write("Mi tamaño asignado mediante un setter es " + dog.tamaño + "<br>");
+    document.write("Mi tamaño obtenido mediante un getter es " + dog.getTamaño);
+
+</script>
+</body>
+</html>

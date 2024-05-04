@@ -28,13 +28,13 @@ while (numero < 11) {
   // numero += 1;
 }
 
-// while (true) {
-//   console.log(numero);
-//   numero++;
-//   if (numero > 12) {
-//     break;
-//   }
-// }
+while (true) {
+  console.log(numero);
+  numero++;
+  if (numero > 12) {
+    break;
+  }
+}
 
 // Do while
 do {
@@ -75,7 +75,7 @@ var fullName2 = name + " " + lastName;
 console.log(fullName);
 console.log(fullName2);
 
-// For in y For on
+// For in (devuelve indice) 
 
 var datos = ["William", "Jose", "Pinto", "Rodriguez"];
 
@@ -83,6 +83,25 @@ for (info in datos) {
     console.log(info);
 }
 
+// For of (devuelve valor)
+
 for (info of datos) {
     console.log(info);
+}
+
+// Sentencia label
+
+let array1 = ["William", "Jose", "Pinto", "Rodriguez"];
+let array2 = ["Pedro", "Jesus", array1, "Gonzalez"];
+
+forLabel:
+for(array in array2) {
+  if(array == 2) {
+    for(array of array1) {
+      console.log(array);
+      break forLabel;
+    }
+  } else {
+    console.log(array2[array]);
+  }
 }

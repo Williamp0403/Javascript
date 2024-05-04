@@ -23,7 +23,7 @@ console.log(typeof numeros);
 
 var frutas = ["manzana", "pera", "uva", "fresa"];
 
-console.log(frutas[3]);
+console.log(frutas);
 
 var mixto = [1, "hola", true, 3.1416];
 

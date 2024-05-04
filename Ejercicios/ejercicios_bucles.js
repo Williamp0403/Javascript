@@ -60,10 +60,10 @@ for (i = 0; i < size; i++) {
 console.log(board);
  
 
-// var row1 = " # # # #";
-// var row2 = "# # # # "
+    var row1 = " # # # #";
+    var row2 = "# # # # "
 
-// for(i = 1; i <= 4; i++){
-//     console.log(row1);
-//     console.log(row2);
-// }
+    for(i = 1; i <= 4; i++){
+        console.log(row1);
+        console.log(row2);
+    }

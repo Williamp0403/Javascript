@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de cofla 2</title>
+</head>
+<body>
+<script>
+
+// Haz una calculadora basica que tenga las funciones de sumar, restar, multiplicar y dividir
+
+const sumar = (num1, num2)=> {
+    return parseFloat(num1) + parseFloat(num2);
+}
+
+const restar = (num1, num2)=> {
+    return parseFloat(num1) - parseFloat(num2);;
+}
+const multiplicar = (num1, num2)=> {
+    return parseFloat(num1) * parseFloat(num2);;
+}
+const dividir = (num1, num2)=> {
+    return parseFloat(num1) / parseFloat(num2);;
+}
+
+let operador = prompt("Que operacion desea realizar? +) Sumar. -) Restar. *) Multiplicar. /) Dividir.");
+switch (operador) {
+    case '+': {
+        let numero1 = prompt("Ingresa el primer numero a sumar");
+        let numero2 = prompt("Ingresa el segundo numero a sumar");
+        alert(`El resultado es: ${sumar(numero1, numero2)}`)    
+        break;
+    }
+    case '-': {
+        let numero1 = prompt("Ingresa el primer numero a restar");
+        let numero2 = prompt("Ingresa el segundo numero a restar");
+        alert(`El resultado es: ${restar(numero1, numero2)}`)    
+        break;
+    }
+    case '*': {
+        let numero1 = prompt("Ingresa el primer numero a multiplicar");
+        let numero2 = prompt("Ingresa el segundo numero a multiplicar");
+        alert(`El resultado es: ${multiplicar(numero1, numero2)}`)    
+        break;
+    }
+    case '/': {
+        let numero1 = prompt("Ingresa el primer numero a dividir");
+        let numero2 = prompt("Ingresa el segundo numero a dividir");
+        alert(`El resultado es: ${dividir(numero1, numero2)}`)    
+        break;
+    }
+    default: {
+        alert("Opcion no valida");
+        break;
+    }
+}
+
+</script>
+</body>
+</html>
