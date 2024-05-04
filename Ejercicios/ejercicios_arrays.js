@@ -103,7 +103,19 @@ function par_o_impar(array) {
     console.log(true)   
    }
 }
-par_o_impar([2, 4, 6, 3, 4, 10]);
+par_o_impar([2, 4, 6, 2, 4, 10]);
+
+// Crea una funcion que reciba un string como parametro y devuelva true si contiene 4 letras o mas y false en caso contrario
+
+function string(string){
+  let longitud = string.length;
+  if(longitud >= 4) {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
+}
+string("hola");
 
 // Tienes una lista(Arreglo) de objetos con los nombres de los miembros de una familia y su edad. Este script debe devolver dos objetos con los datos (nombre y edad) del miembro de mayor edad y del de menor edad. Ejemplo del arreglo [{nombre: “Ana”, edad: 42}, {nombre: “Jose”,  edad: “15"}, {nombre: “Pablo”, edad: 22}]
 
@@ -150,3 +162,19 @@ console.log("El miembro con mayor edad es:" , menorArray);
 // . En este ejercicio debes crear dos arrays para representar dos equipos de trabajo. Al primer array le llamaremos ocupados y al segundo libres. Ambos están llenos con 3 nombres. Debes crear una función rotar(lista1, lista2) que pase el primer nombre de la lista lista1 a l final de lista2, y luego el primero de la lista2 al final de lista1. Para ver que funciona escribe los arrays antes y después de usar esta función. Ejemplo:
 
 // Por ejemplo: Inicialmente tenemos ocupados: Pedro, Abril, Camila y libres Alvaro, Rodrigo y Eva. Tras llamar a la funcion sale Pedro y entra Alvaro. Quedando Ocupados: Abril, Camila y Alvaro, Libres: Rodrigo, Eva y Pedro
+
+ocupados = ["Pedro","Abril", "Camila"];
+libres = ["Alvaro", "Rodrigo", "Eva"];
+console.log("Ocupados:", ocupados)
+console.log("Libres:", libres)
+
+function rotar(lista1, lista2) {
+lista2.push(lista1[0])
+lista1.shift();
+lista1.push(lista2[0])
+lista2.shift();
+}
+rotar(ocupados, libres)
+
+console.log("Ocupados:", ocupados)
+console.log("Libres:", libres)
