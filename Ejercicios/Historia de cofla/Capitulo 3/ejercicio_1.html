@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de Cofla 3</title>
+    <style>
+        button{
+            background-color: rgb(96, 165, 250);
+            border: 0cap;
+            border-radius: 8px;
+            padding: 10px 7px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        button:hover{
+            background-color: rgb(37, 99, 235);
+            transition: background-color 0.3s ease;
+        }
+        .button{
+            background-color: rgb(239, 68, 68);
+        }
+        h1{
+            font-size: 25px;
+            color: blue;
+        }
+    </style>
+</head> 
+<body>
+    <div>
+        <p id="mobile-info-1"></p>
+        <button onclick="celular1.precionarBotonEncendido()" class="button" type="button">Encendido / Apagado</button>
+        <button onclick="celular1.reiniciar()" type="button">Reiniciar</button>
+        <button onclick="celular1.tomarFotos()" type="button">Tomar Foto</button>
+        <button onclick="celular1.grabar()" type="button">Grabar Video</button>
+    </div>
+    <div>
+        <p id="mobile-info-2"></p>
+        <button onclick="celular2.precionarBotonEncendido()" class="button" type="button">Encendido / Apagado</button>
+        <button onclick="celular2.reiniciar()" type="button">Reiniciar</button>
+        <button onclick="celular2.tomarFotos()" type="button">Tomar Foto</button>
+        <button onclick="celular2.grabar()" type="button">Grabar Video</button>
+    </div>
+    <div>
+        <p id="mobile-info-3"></p>
+        <button onclick="celular3.precionarBotonEncendido()" class="button" type="button">Encendido / Apagado</button>
+        <button onclick="celular3.reiniciar()" type="button">Reiniciar</button>
+        <button onclick="celular3.tomarFotos()" type="button">Tomar Foto</button>
+        <button onclick="celular3.grabar()" type="button">Grabar Video</button>
+    </div>
+    <h1>Gama Alta</h1>
+    <div>
+        <p id="gama-alta-info-1"></p>
+        <button onclick="celularGamaAlta1.precionarBotonEncendido()" class="button" type="button">Encendido / Apagado</button>
+        <button onclick="celularGamaAlta1.reiniciar()" type="button">Reiniciar</button>
+        <button onclick="celularGamaAlta1.tomarFotos()" type="button">Tomar Foto</button>
+        <button onclick="celularGamaAlta1.grabar()" type="button">Grabar Video</button>
+        <button onclick="celularGamaAlta1.grabarCamaraLenta()" type="button">Grabar Video en Camara lenta</button>
+        <button onclick="celularGamaAlta1.reconocimientoFacial()" type="button">Reconocimineto Facial</button>
+    </div>
+    <div>
+        <p id="gama-alta-info-2"></p>
+        <button onclick="celularGamaAlta2.precionarBotonEncendido()" class="button" type="button">Encendido / Apagado</button>
+        <button onclick="celularGamaAlta2.reiniciar()" type="button">Reiniciar</button>
+        <button onclick="celularGamaAlta2.tomarFotos()" type="button">Tomar Foto</button>
+        <button onclick="celularGamaAlta2.grabar()" type="button">Grabar Video</button>
+        <button onclick="celularGamaAlta2.grabarCamaraLenta()" type="button">Grabar Video en Camara lenta</button>
+        <button onclick="celularGamaAlta2.reconocimientoFacial()" type="button">Reconocimiento Facial</button>
+    </div>
+</body>    
+<script>
+
+    // Cofla entro a una tienda que vende celulares porque le parecio bastante bueno comprarse un nuevo celular. De todos los modelos que hay disponibles en esa tienda, a Cofla le llamaron la atencion 3 telefonos especificamente, el antes de comprar esos celulares quiere ver las cualidades y comportamientos de cada uno para poder comprarlos, ahi entramos nosotros.
+
+    // CREAR SOLUCIONES
+
+    // - Crear un sistema para mostrarle a cofla las particularidades de los 3 celulares
+    // - Cada celular debe tener color, peso, resolucion de pantalla, resolucion de camara y memoria ram
+    // - Cada celular debe poder prender, reiniciar, apagar, tomar fotos y grabar
+
+    class Celular{
+        constructor(marca, color, peso, tamaño, resolucionCamara, ram){
+            this.marca = marca
+            this.color = color;
+            this.peso = peso;
+            this.tamaño = tamaño;
+            this.resolucionCamara =  resolucionCamara;
+            this.ram = ram;
+            this.encendido = false;
+        }
+        precionarBotonEncendido(){
+            if(this.encendido == false) {
+                alert("Prendiendo celular...");
+                this.encendido = true;
+            } else {
+                alert("Apagando celular...");
+                this.encendido = false;
+            }
+        }
+        reiniciar(){
+            if(this.encendido == true) {
+                alert("Reiniciando celular");
+            } else{
+                alert("El celular esta apagado");
+            }
+        }
+        tomarFotos(){
+            if(this.encendido == true) {
+                alert(`Foto tomada en una resolucion ${this.resolucionCamara}`);
+            } else{
+                alert("El celular esta apagado");
+            }
+        }
+        grabar(){
+            if(this.encendido == true){
+                alert(`Grabando video en una resolucion de ${this.resolucionCamara}`);
+            } else {
+                alert("El celular esta apagado");
+            }
+        }
+        mobileInfo(){
+            return `Marca: <b>${this.marca}</b><br>
+                    Color: <b>${this.color}</b><br>
+                    Peso: <b>${this.peso}</b><br>
+                    Tamaño: <b>${this.tamaño}</b><br>
+                    Memoria RAM: <b>${this.ram}</b><br>
+                    Resolucion de Camara: <b>${this.resolucionCamara}</b><br>
+                `;
+        }
+    }
+
+    class CelularGamaAlta extends Celular{
+        constructor(marca, color, peso, tamaño, resolucionCamara, ram, camaraExtra){
+            super(marca, color, peso, tamaño, resolucionCamara, ram);
+            this.camaraExtra = camaraExtra;
+        }
+        grabarCamaraLenta(){
+            if(this.encendido == true) {
+                alert("Estas grabando en camara lenta");
+            } else{
+                alert("El celular esta apagado");
+            }
+        }
+        reconocimientoFacial(){
+            if(this.encendido == true) {
+                alert('Vamos a iniciar un reconocimiento facial');
+            } else{
+                alert("El celular esta apagado");
+            }
+        }
+        mobileInfoGamaAlta(){
+            return this.mobileInfo() + `Resolucion de Camara extra: <b>${this.camaraExtra}</b>`
+        }
+    } 
+
+    const celular1 = new Celular("Tecno Spark 10C","Negro", "150g", "5p" , "HD full", "4GB");
+    const celular2 = new Celular("Samsung a21","Blanco", "120g", "5.5p", "480", "2GB");
+    const celular3 = new Celular("Iphone 11","Azul", "160g", "6p", "720", "8GB");
+
+    const celularGamaAlta1 = new CelularGamaAlta("Samsung a23s", "Negro", "155g", "6p", "HD full", "16GB", "HD")
+    const celularGamaAlta2 = new CelularGamaAlta("Iphone 14", "Blanco", "150g", "6p", "full", "16GB", "HD")
+
+
+    document.querySelector("#mobile-info-1").innerHTML = `${celular1.mobileInfo()}`;
+    document.querySelector("#mobile-info-2").innerHTML = `${celular2.mobileInfo()}`;
+    document.querySelector("#mobile-info-3").innerHTML = `${celular3.mobileInfo()}`;
+
+    document.querySelector("#gama-alta-info-1").innerHTML = `${celularGamaAlta1.mobileInfoGamaAlta()}`;
+    document.querySelector("#gama-alta-info-2").innerHTML = `${celularGamaAlta2.mobileInfoGamaAlta()}`;
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var botones = document.querySelectorAll('.button');
+    
+    botones.forEach(function(boton) {
+        boton.addEventListener('click', function() {
+            if (boton.style.backgroundColor == 'rgb(96, 165, 250)') {
+                boton.style.backgroundColor = 'rgb(239, 68, 68)';
+            } else {
+                boton.style.backgroundColor = 'rgb(96, 165, 250)';
+            }
+        });
+    });
+});
+
+
+</script>
+</html>

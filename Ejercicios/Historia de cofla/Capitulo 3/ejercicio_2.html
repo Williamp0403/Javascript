@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de Cofla 3</title>
+    <style>
+        button{
+            background-color: rgb(96, 165, 250);
+            border-radius: 8px;
+            padding: 10px 7px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+            border: 0cap;
+        }
+        button:hover{
+            background-color: rgb(33, 127, 243);
+        }
+        .button-instalar{
+            border: 2px solid rgb(107, 106, 106);
+            border-radius: 18px;
+        }
+        h1{
+            text-align: center;
+            color: blue;
+            text-decoration: underline;
+        }
+        div{
+            margin-left:30px;
+            margin-bottom: 30px;
+            border-right: 2px solid blue;
+            display: inline-block;
+        }
+        p{
+            font-size: 17px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Play Store</h1>
+    <div>
+        <p id="info-app-1"></p>
+        <button id="button-instalar-1" class="button-instalar" type="button">Instalar</button>
+        <button id="abrir-app-1" type="button">Abrir App</button>
+        <button id="cerrar-app-1" type="button">Cerrar App</button>
+    </div>
+    <div>
+        <p id="info-app-2"></p>
+        <button id="button-instalar-2" class="button-instalar" type="button">Instalar</button>
+        <button id="abrir-app-2" type="button">Abrir App</button>
+        <button id="cerrar-app-2" type="button">Cerrar App</button>
+    </div>
+    <div>
+        <p id="info-app-3"></p>
+        <button id="button-instalar-3" class="button-instalar" type="button">Instalar</button>
+        <button id="abrir-app-3" type="button">Abrir App</button>
+        <button id="cerrar-app-3" type="button">Cerrar App</button>
+    </div>
+    <div>
+        <p id="info-app-4"></p>
+        <button id="button-instalar-4" class="button-instalar" type="button">Instalar</button>
+        <button id="abrir-app-4" type="button">Abrir App</button>
+        <button id="cerrar-app-4" type="button">Cerrar App</button>
+    </div>
+    <div>
+        <p id="info-app-5"></p>
+        <button id="button-instalar-5" class="button-instalar" type="button">Instalar</button>
+        <button id="abrir-app-5" type="button">Abrir App</button>
+        <button id="cerrar-app-5" type="button">Cerrar App</button>
+    </div>
+</body>
+
+<script>
+
+    // Cofla ya tiene su nuevo celular y ahora esta mirando las aplicaciones del Play Store ya que quiere jugar juegos que sean muy populares, que tengan buena puntuacion y que pesen poco, pero las 7 apps que llamaron su atencion son un tanto similares y sabe que si se descarga todas, probablemente juegue con todas, pero el se va a descargar solo 2 para tener perdidas innecesarias de tiempo jugando con su celular, pero el problema viene cuando no puede decidirse cual de todas estas aplicaciones es la que va a descargar.
+
+    // CREAR SOLUCIONES
+
+    // - Crear un sistema que ayude a cofla a decidir cual app descargar.
+    // - La informacion de los instaladores debe contener la cantidad de descargas, la puntuacion, y el peso.
+    // - Las Apps se deben poder instalar, abrir, cerrar y desinstalar.
+
+    class Aplicacion{
+        constructor(nombre, descargas, puntuacion, peso){
+            this.nombre = nombre;
+            this.descargas = descargas;
+            this.puntuacion = puntuacion;
+            this.peso = peso;
+            this.instalar = false;
+            this.abrirApp = false;
+        }
+        instalarDesinstalar(){
+            if(this.instalar == false){
+                alert("Instalando aplicacion...");
+                this.instalar = true;
+            } else{
+                alert("Desinstalando aplicacion...");
+                this.instalar = false;
+            }
+        }
+        abrir(){
+            if(this.instalar == true && this.abrirApp == false) {
+                alert("Abriendo app...");
+                this.abrirApp = true;
+            } else if (this.instalar == true && this.abrirApp == true){
+                alert("La app ya esta abierta");
+            } else{
+                alert("La app no se ha instalado");
+            }
+        }
+        cerrar(){
+            if(this.instalar == true && this.abrirApp == true){
+                alert("Cerrando app...")
+                this.abrirApp = false;
+            } else if (this.instalar == true && this.abrirApp == false){
+                alert("La app no se ha abierto");
+            } else{
+                alert("La app no se ha instalado");
+            }
+        }
+        mostrarInfo(){
+            return `
+                    Nombre: <b>${this.nombre}</b><br>
+                    Cantidad de descargas: <b>${this.descargas}</b><br>
+                    Puntuación: <b>${this.puntuacion}⭐</b><br>
+                    Peso: <b>${this.peso}</b><br>
+                   `
+        }
+    }
+
+    const app1 = new Aplicacion("Pug Mobile","3M", "4.6", "1GB");
+    const app2 = new Aplicacion("Call of Duty Mobile", "5M", "4.8", "2GB");
+    const app3 = new Aplicacion("COD Warzone Mobile", "1M", "3.9", "3GB");
+    const app4 = new Aplicacion("Free Fire", "5M", "4.7", "500MB");
+    const app5 = new Aplicacion("Blood Strike", "4M", "4.9", "700MB");
+
+    document.querySelector("#info-app-1").innerHTML = `${app1.mostrarInfo()}`
+    document.querySelector("#info-app-2").innerHTML = `${app2.mostrarInfo()}`
+    document.querySelector("#info-app-3").innerHTML = `${app3.mostrarInfo()}`
+    document.querySelector("#info-app-4").innerHTML = `${app4.mostrarInfo()}`
+    document.querySelector("#info-app-5").innerHTML = `${app5.mostrarInfo()}`
+    
+    document.querySelector("#button-instalar-1").addEventListener("click", ()=>{app1.instalarDesinstalar()});
+    document.querySelector("#button-instalar-2").addEventListener("click", ()=>{app2.instalarDesinstalar()});
+    document.querySelector("#button-instalar-3").addEventListener("click", ()=>{app3.instalarDesinstalar()});
+    document.querySelector("#button-instalar-4").addEventListener("click", ()=>{app4.instalarDesinstalar()});
+    document.querySelector("#button-instalar-5").addEventListener("click", ()=>{app5.instalarDesinstalar()});
+    document.querySelector("#abrir-app-1").addEventListener("click", ()=>{app1.abrir()});
+    document.querySelector("#abrir-app-2").addEventListener("click", ()=>{app2.abrir()});
+    document.querySelector("#abrir-app-3").addEventListener("click", ()=>{app3.abrir()});
+    document.querySelector("#abrir-app-4").addEventListener("click", ()=>{app4.abrir()});
+    document.querySelector("#abrir-app-5").addEventListener("click", ()=>{app5.abrir()});
+    document.querySelector("#cerrar-app-1").addEventListener("click", ()=>{app1.cerrar()});
+    document.querySelector("#cerrar-app-2").addEventListener("click", ()=>{app2.cerrar()});
+    document.querySelector("#cerrar-app-3").addEventListener("click", ()=>{app3.cerrar()});
+    document.querySelector("#cerrar-app-4").addEventListener("click", ()=>{app4.cerrar()});
+    document.querySelector("#cerrar-app-5").addEventListener("click", ()=>{app5.cerrar()});
+
+    let botones = document.querySelectorAll('.button-instalar');   
+        botones.forEach(function(boton) {
+            boton.addEventListener('click', function() {
+                if(boton.style.backgroundColor == 'rgb(156, 163, 175)') /*Gris*/ {
+                    boton.style.backgroundColor = 'rgb(96, 165, 250)' /*Azul*/;
+                    boton.innerHTML = "Instalar";
+                    } else{
+                        boton.style.backgroundColor = 'rgb(156, 163, 175)' /*Gris*/;
+                        boton.innerHTML = "Desinstalar";
+                    }
+                });
+            });
+
+</script>
+
+</html>
