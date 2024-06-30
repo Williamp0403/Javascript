@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caluculadora Básica</title>
+    <style>
+        *{
+            color: white;
+        }
+
+        #box{
+            max-width: max-content;
+            margin: auto;
+            background-color: rgb(61, 65, 64);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        #show{
+            width: auto;
+            height: 50px;
+            background-color: rgb(159, 160, 161);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 0px 5px;
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        button{
+            border-radius: 7px;
+            height: 70px;
+            width: 70px;
+            background-color: rgb(159, 160, 161);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="show">
+            
+        </div>
+        <div>
+            <button>/</button>
+            <button class="numbers">7</button>
+            <button class="numbers">8</button>
+            <button class="numbers">9</button>
+            <button> --x </button>
+        </div>
+        <div>
+            <button>*</button>
+            <button class="numbers">4</button>
+            <button class="numbers">5</button>
+            <button class="numbers">6</button>
+            <button>Clear</button>
+        </div>
+        <div>
+            <button>-</button>
+            <button class="numbers">1</button>
+            <button class="numbers">2</button>
+            <button class="numbers">3</button>
+            <button>x2</button>
+        </div>
+        <div>
+            <button>+</button>
+            <button>,</button>
+            <button class="numbers">0</button>
+            <button>=</button>
+            <button>raiz</button>
+        </div>
+    </div>
+</body>
+<script>
+
+    let numbers = document.querySelectorAll(".numbers");
+    numbers.forEach(function(button){
+        button.addEventListener("click", ()=>{
+            show = document.getElementById("show");
+            show.innerHTML += button.innerHTML;
+        })
+    })
+</script>
+</html>
