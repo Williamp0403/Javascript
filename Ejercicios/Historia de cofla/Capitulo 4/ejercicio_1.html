@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background-image: url('https://i.pinimg.com/564x/be/2c/38/be2c386bdf2b85b8961e3d8e044f6dea.jpg')">
+    <div class="bg-blue-300 max-w-screen-sm mx-auto mt-20 p-8 rounded-lg">
+        <h1 class="text-center font-bold text-white underline underline-4 text-2xl mb-7">Calculadora Simple</h1>
+        <form class="flex justify-center space-x-3" onsubmit= "return false" action="">
+            <div class="w-60 h-12 relative flex rounded-xl">
+                <input class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl bg-white border border-[#4070f4] focus:shadow-xl" id="num1" required="" type="number">
+                <label class="absolute top-1/2 translate-y-[-50%] bg-transparent left-4 px-2 peer-focus:top-[-25%] peer-focus:left-3 font-light text-base peer-focus:text-lg  peer-valid:-top-0 peer-valid:left-3 peer-valid:text-lg peer-focus:text-white duration-150" for="address">Número 1</label
+                >
+              </div>
+            <select class="p-2 rounded-lg outline-none " id="operaciones">
+                <option value="suma">Suma</option>
+                <option value="resta">Resta</option>
+                <option value="multiplicacion">Multiplicación</option>
+                <option value="division">División</option>
+                <option value="potencia">Potencia</option>
+                <option value="raiz-cuadrada">Raíz Cuadrada</option>
+                <option value="raiz-cubica">Raíz Cubica</option>
+             </select>
+             <div class="w-60 h-12 relative flex rounded-xl">
+                <input id="num2" class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl bg-white border border-[#4070f4] focus:shadow-xl" required="" type="number">
+                <label id="n2" class="absolute top-1/2 translate-y-[-50%] bg-transparent left-4 px-2 peer-focus:top-[-25%] peer-focus:left-3 font-light text-base peer-focus:text-lg  peer-valid:-top-0 peer-valid:left-3 peer-valid:text-lg peer-focus:text-white duration-150" for="address">Número 2</label
+                >
+              </div>
+            <button id="igual" class="bg-white p-2 rounded-lg">=</button>
+         </form>
+         <div id="resultado" class="mt-4 flex items-center p-2 bg-white text-2xl rounded-lg w-auto h-14">
+         </div>
+    </div>
+    <div  class="flex justify-center">
+        <img src="Sin título.png" alt="">
+    </div>
+
+
+</body>
+<script>
+    // Cofla ya esta terminando el primer semestre del ciclo, la tarea que le de debe realizar es mucho mas avanzada de la que tenia antes, ademas de suma, resta, multiplicacion y division, ahora tambien necesitara calcular potencias, raices cuadradas y cubicas,
+
+    // CREAR SOLUCIONES
+
+    // - Perfeccionar calculadora para poder implementar las nuevas funciones
+
+    function suma(n1, n2){
+        if(n1 == "" || n2 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(n1) + parseFloat(n2);
+        }
+    }
+    
+    function resta(n1, n2){
+        if(n1 == "" || n2 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(n1) - parseFloat(n2);
+        }
+    }
+
+    function multiplicacion(n1, n2){
+        if(n1 == "" || n2 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(n1) * parseFloat(n2);
+        }
+    }
+
+    function division(n1, n2){
+        if(n1 == "" || n2 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(n1) / parseFloat(n2);
+        }
+    }
+
+    function potencia(n1, n2){
+        if(n1 == "" || n2 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(n1) ** parseFloat(n2);
+        }
+    }
+
+    function raizCuadrada(n1){
+        if(n1 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(Math.sqrt(n1));
+        }
+    }
+
+    function raizCubica(n1){
+        if(n1 == "") {
+            return "Error!!";
+        } else {
+            return parseFloat(Math.cbrt(n1));
+        }
+    }
+
+  document.getElementById('operaciones').addEventListener('change', function() {
+    let num2 = document.getElementById("num2");
+        if(this.value == "raiz-cubica" || this.value == "raiz-cuadrada") {
+            num2.disabled = true;
+            num2.classList.add("cursor-no-drop", "bg-gray-300");
+            num2.classList.remove("bg-transparent", "border", "border-[#4070f4]");
+            num2.value = "";
+            document.getElementById("n2").classList.add("cursor-no-drop");
+        } else{
+            num2.disabled = false;
+            num2.classList.add("bg-transparent", "border", "border-[#4070f4]");
+            num2.classList.remove("cursor-no-drop", "bg-gray-300");
+            document.getElementById("n2").classList.remove("cursor-no-drop");
+        }
+  });
+    
+    document.getElementById("igual").addEventListener("click", ()=>{
+        let num1 = document.getElementById("num1").value;
+        let num2 = document.getElementById("num2").value;
+        let operacion = document.getElementById("operaciones").value;
+            switch(operacion){
+            case "suma": {
+                document.getElementById("resultado").innerHTML = suma(num1, num2);
+                break;
+            }
+            case "resta": {
+                document.getElementById("resultado").innerHTML = resta(num1, num2);
+                break;
+            }
+            case "multiplicacion": {
+                document.getElementById("resultado").innerHTML = multiplicacion(num1, num2);
+                break;
+            }
+            case "division": {
+                document.getElementById("resultado").innerHTML = division(num1, num2);
+                break;
+            }
+            case "potencia": {
+                document.getElementById("resultado").innerHTML = potencia(num1, num2);
+                break;
+            }
+            case "raiz-cuadrada": {
+                document.getElementById("resultado").innerHTML = raizCuadrada(num1);
+                break;
+            }
+            case "raiz-cubica": {
+                document.getElementById("resultado").innerHTML = raizCubica(num1)
+                break;
+            }
+        } 
+    })
+</script>
+</html>

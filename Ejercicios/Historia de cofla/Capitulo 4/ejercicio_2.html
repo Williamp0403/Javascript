@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Materias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex justify-between items-center bg-blue-400  p-4">
+        <h1 class="font-bold text-3xl text-white text-center">Registro de Materias</h1>
+        <div class="flex">
+            <div class="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-white p-5">
+                <svg viewBox="0 0 20 20" aria-hidden="true" class="pointer-events-none absolute w-5 fill-gray-500 transition">
+                    <path d="M16.72 17.78a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM9 14.5A5.5 5.5 0 0 1 3.5 9H2a7 7 0 0 0 7 7v-1.5ZM3.5 9A5.5 5.5 0 0 1 9 3.5V2a7 7 0 0 0-7 7h1.5ZM9 3.5A5.5 5.5 0 0 1 14.5 9H16a7 7 0 0 0-7-7v1.5Zm3.89 10.45 3.83 3.83 1.06-1.06-3.83-3.83-1.06 1.06ZM14.5 9a5.48 5.48 0 0 1-1.61 3.89l1.06 1.06A6.98 6.98 0 0 0 16 9h-1.5Zm-1.61 3.89A5.48 5.48 0 0 1 9 14.5V16a6.98 6.98 0 0 0 4.95-2.05l-1.06-1.06Z"></path>
+                </svg>
+            </div>
+            <input type="text" class="w-full max-w-[160px] bg-white pl-2 text-base font-semibold outline-0" placeholder="Buscar materia..." id="materia">
+            <input type="button" value="Buscar" class="bg-blue-500 p-3 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-blue-800 transition-colors cursor-pointer" id="buscar-materia">
+        </div>
+    </div>
+    <div class="flex items-center justify-around m-5">
+        <div>
+            <button id="materias-inscritas" class="cursor-pointer rounded-xl relative group overflow-hidden border-2 px-8 py-2 border-blue-500">
+                <span class="font-bold text-white text-xl relative z-10 group-hover:text-blue-500 duration-500">Ver materias inscritas</span>
+                <span class="absolute top-0 left-0 w-full bg-blue-400 duration-500 group-hover:-translate-x-full h-full"></span>
+                <span class="absolute top-0 left-0 w-full bg-blue-500 duration-500 group-hover:translate-x-full h-full"></span>              
+                <span class="absolute top-0 left-0 w-full bg-blue-500 duration-500 delay-300 group-hover:-translate-y-full h-full"></span>
+                <span class="absolute delay-300 top-0 left-0 w-full bg-blue-500 duration-500 group-hover:translate-y-full h-full"></span>
+              </button>
+        </div>
+        <div>
+            <button id="inscribir'materias" class="cursor-pointer rounded-xl relative group overflow-hidden border-2 px-8 py-2 border-blue-500">
+                <span class="font-bold text-white text-xl relative z-10 group-hover:text-blue-500 duration-500">Inscribir materias</span>
+                <span class="absolute top-0 left-0 w-full bg-blue-400 duration-500 group-hover:-translate-x-full h-full"></span>
+                <span class="absolute top-0 left-0 w-full bg-blue-500 duration-500 group-hover:translate-x-full h-full"></span>              
+                <span class="absolute top-0 left-0 w-full bg-blue-500 duration-500 delay-300 group-hover:-translate-y-full h-full"></span>
+                <span class="absolute delay-300 top-0 left-0 w-full bg-blue-500 duration-500 group-hover:translate-y-full h-full"></span>
+              </button>
+        </div>
+    </div>
+
+    <div id="caja-materias" class="hidden">
+        <p class="font-bold text-blue-500 text-xl underline underline-2">Alumnos:</p>
+        <table id="mostrar-alumnos" class="border-2 border-separate border border-slate-500 border-spacing-x-2 border-spacing-y-2">
+        </table>
+        <p class="font-bold text-blue-500 text-xl" id="mostrar-profesor"></p>
+    </div>
+    <p class="hidden" id="materia-no-encontrada"></p>
+
+    <div id="caja-materias-inscritas" class="hidden">
+        <span id="mat-inscritas" class="row-start-1 col-start-1 border text-center text-lg bg-blue-300 border-slate-700">Materia</span>
+        <div id="mostrar-materia" class="col-start-1 flex flex-col" >
+        </div>
+        <span id="prof-inscritos" class="row-start-1 col-start-2 border text-center text-lg bg-blue-300 border-slate-700">Profesor</span>
+        <div id="mostrar-profesores" class="col-start-2 flex flex-col">
+        </div>
+        <p id="cantidad-clases" class="text-blue-500"></p>
+    </div>
+
+    <dialog id="caja-inscribir-materias" class="w-80 text-lg text-white relative bg-gray-500 p-4 rounded-lg">
+        <button id="cerrar-modal" class="absolute bg-gray-400 hover:bg-gray-300 px-3 py-1 top-0 right-0">X</button>
+        <p class="flex justify-between items-center border-t-2 border-gray-400 mt-7 pt-1">Castellano<button id="castellano" class="bg-blue-400 select-none hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-lg">Inscribir</button></p>
+        <p class="flex mt-2 justify-between items-center">Ingles<button id="ingles" class="bg-blue-400 select-none hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-lg">Inscribir</button></p>
+        <p class="flex mt-2 justify-between items-center">Programación<button id="programacion" class="bg-blue-400 select-none hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-lg">Inscribir</button></p>
+        <p class="flex mt-2 justify-between items-center">Base de Datos<button id="base-de-datos" class="bg-blue-400 select-none hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-lg">Inscribir</button></p>
+        <p class="flex mt-2 justify-between items-center">Inteligencia Artificial<button id="inteligencia-artificial" class="bg-blue-400 select-none hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-lg">Inscribir</button></p>
+        <p class="flex mt-2 justify-between items-center">Ciberseguridad<button id="ciberseguridad" class="bg-blue-400 select-none hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-lg">Inscribir</button></p>
+    </dialog>
+  
+</body>
+<script>
+    // A) La facultad de cofla está por comenzar y ya las 12 materias tienen asignado un profesor y todos los alumnos que se anotaron en dichas clases, pero necesitanos ver esto mas ordenadamente.
+
+    // CREAR SOLUCIONES:
+
+    // - Crear una funcion que al pasarle como parametro la materia nos devuelva:
+    // *Profesor asignado.
+    // *El nombre de todos los alumnos.
+
+    // - Crear funcion que nos diga en cuantas clases esta cofla.
+
+    // - Nombrar las clases en las que está y los profesores de cada una.
+
+    // B) Cofla ya vio las 12 materias y se decidio en cual se va a inscribir asi que en tres dias lo hara, el problema es que se rompio el sistema de inscripciones.
+
+    // CREAR SOLUCIONES:
+
+    // - Crear una funcion para preguntarle a cofla en que materia se quiere inscribir.
+    // - Si ya hay 20 alumnos anotados en la materia negarle la inscripcion.
+    // - Si hay menos de 20 alumnos inscribir a cofla y añadirlo a la lista de alumnos.
+
+   var alumnos;
+
+    materias = [
+        {
+            nombre: "castellano",
+            profesor: "Pedro Perez",
+            alumnos: ["William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez", "William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez"], 
+        },
+        {
+            nombre: "ingles",
+            profesor: "Juan Martinez",
+            alumnos: ["William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez"], 
+        },
+        {
+            nombre: "programacion",
+            profesor: "Josue Morillo",
+            alumnos: ["William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez", "William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez"], 
+        },
+        {
+            nombre: "base de datos",
+            profesor: "Miguel Rodriguez",
+            alumnos: ["William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez", "William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez"], 
+        },
+        {
+            nombre: "inteligencia artificial",
+            profesor: "Felipe Diaz",
+            alumnos: ["William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez"], 
+        },
+        {
+            nombre: "ciberseguridad",
+            profesor: "Matias Reyes",
+            alumnos: ["William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez", "William Pinto", "Perez Lopez", "Maria Lugo", "Perez Jimenez", "Jesus Navas", "Roberto Gonzalez", "Claudia Rodriguez", "Pepe Blanco", "Antonio Carrasquero", "Manuel Hernandez"], 
+        },
+    ];
+
+    document.getElementById("buscar-materia").addEventListener("click", ()=>{
+        document.getElementById("caja-materias-inscritas").className = "hidden";
+        document.getElementById("materias-inscritas").disabled = false;
+        let weje = document.getElementById("mostrar-alumnos");
+        weje.innerHTML = "";
+        alumnos = undefined;
+        let materia = document.getElementById("materia").value;
+        materia = materia.toLowerCase();      
+        for(let i = 0; i < materias.length ; i++){
+            if(materia == materias[i].nombre) {
+                document.getElementById("caja-materias").className = "block flex flex-col bg-white mx-auto rounded-lg py-5 px-14 max-w-max justify-center items-center";
+                document.getElementById("materia-no-encontrada").className = "hidden";
+                document.getElementById("mostrar-profesor").innerHTML = `Profesor: ${materias[i].profesor}`;
+                alumnos = materias[i].alumnos;
+                let contador = 1;
+                for(alumno of alumnos){
+                    weje.innerHTML += `<tr><th class="border border-slate-700">${contador}</th><th class="border border-slate-700">${alumno}</th></tr>`;
+                    contador++;
+                }               
+            }
+        }
+        if(alumnos == undefined) {
+            document.getElementById("caja-materias").className = "hidden";
+            document.getElementById("materia-no-encontrada").className = "bg-white mx-auto rounded-lg py-5 px-14 max-w-max justify-center items-center font-bold"
+            document.getElementById("materia-no-encontrada").innerHTML = `Materia no encontrada`;
+        }
+    });
+
+    document.getElementById("materias-inscritas").addEventListener("click", ()=>{
+        document.getElementById("mostrar-materia").innerHTML = "";
+        document.getElementById("mostrar-profesores").innerHTML = "";
+        document.getElementById("caja-materias").className = "hidden";
+        document.getElementById("materia-no-encontrada").className = "hidden";
+        document.getElementById("caja-materias-inscritas").className = "block font-bold grid grid max-w-max mx-auto rounded-lg bg-white px-14 py-5";
+        let contador = 1;
+        for(let i = 0; i < materias.length; i++){
+            for(nombre of materias[i].alumnos){
+                if(nombre == "Cofla Gonzalez") {
+                    document.getElementById("mostrar-materia").innerHTML += `<span class="border px-3 py-1 border-slate-700">${materias[i].nombre}</span>`;
+                    document.getElementById("mostrar-profesores").innerHTML += `<span class="border px-3 py-1 border-slate-700">${materias[i].profesor}</span>`;
+                    document.getElementById("cantidad-clases").innerHTML = `Materias totales: ${contador++}`
+                } else{
+
+                }
+            }
+        }
+    });
+
+    document.getElementById("inscribir'materias").addEventListener("click", ()=>{
+        document.getElementById("caja-inscribir-materias").showModal();
+    })
+
+    document.getElementById("cerrar-modal").addEventListener("click", ()=>{
+        document.getElementById("caja-inscribir-materias").close();
+    })
+
+    document.getElementById("castellano").addEventListener("click", ()=>{
+        if(materias[0].alumnos.length >= 20) {
+            alert("Hay 20 personas inscritas, no se pueden agregar más");
+        } else {
+            alert("Materia inscrita correctamente");
+            materias[0].alumnos.push("Cofla Gonzalez");
+            document.getElementById("castellano").className = "bg-green-400 text-white font-bold px-3 py-1 select-none rounded-lg";
+            document.getElementById("castellano").innerHTML = "Inscrita";
+            document.getElementById("castellano").disabled = true;
+        }
+    })
+    document.getElementById("ingles").addEventListener("click", ()=>{
+        if( materias[1].alumnos.length >= 20){
+            alert("Hay 20 personas inscritas, no se pueden agregar más");
+        } else {
+            alert("Materia inscrita correctamente");
+            materias[1].alumnos.push("Cofla Gonzalez");
+            document.getElementById("ingles").className = "bg-green-400 text-white font-bold px-3 py-1 select-none rounded-lg";
+            document.getElementById("ingles").innerHTML = "Inscrita";
+            document.getElementById("ingles").disabled = true;
+        }
+    })
+    document.getElementById("programacion").addEventListener("click", ()=>{
+        if(materias[2].alumnos.length >= 20){
+            alert("Hay 20 personas inscritas, no se pueden agregar más");
+        } else {
+            alert("Materia inscrita correctamente");
+            materias[2].alumnos.push("Cofla Gonzalez");
+            document.getElementById("programacion").className = "bg-green-400 text-white font-bold px-3 py-1 select-none rounded-lg";
+            document.getElementById("programacion").innerHTML = "Inscrita";
+            document.getElementById("programacion").disabled = true;
+        }
+    })
+    document.getElementById("base-de-datos").addEventListener("click", ()=>{
+        if(materias[3].alumnos.length >= 20){
+            alert("Hay 20 personas inscritas, no se pueden agregar más");
+        } else {
+            alert("Materia inscrita correctamente");
+            materias[3].alumnos.push("Cofla Gonzalez");
+            document.getElementById("base-de-datos").className = "bg-green-400 text-white font-bold px-3 py-1 select-none rounded-lg";
+            document.getElementById("base-de-datos").innerHTML = "Inscrita";
+            document.getElementById("base-de-datos").disabled = true;
+        }
+    })
+    document.getElementById("inteligencia-artificial").addEventListener("click", ()=>{
+        if(materias[4].alumnos.length >= 20){
+            alert("Hay 20 personas inscritas, no se pueden agregar más");
+        } else {
+        alert("Materia inscrita correctamente");
+        materias[4].alumnos.push("Cofla Gonzalez");
+        document.getElementById("inteligencia-artificial").className = "bg-green-400 text-white font-bold px-3 py-1 select-none rounded-lg";
+        document.getElementById("inteligencia-artificial").innerHTML = "Inscrita";
+        document.getElementById("inteligencia-artificial").disabled = true;
+        }
+    })
+    document.getElementById("ciberseguridad").addEventListener("click", ()=>{
+        if(materias[5].alumnos.length >= 20){
+            alert("Hay 20 personas inscritas, no se pueden agregar más");
+        } else {
+        alert("Materia inscrita correctamente");
+        materias[5].alumnos.push("Cofla Gonzalez");
+        document.getElementById("ciberseguridad").className = "bg-green-400 text-white font-bold px-3 py-1 select-none rounded-lg";
+        document.getElementById("ciberseguridad").innerHTML = "Inscrita";
+        document.getElementById("ciberseguridad").disabled = true;
+        }
+    })
+</script>
+</html>
