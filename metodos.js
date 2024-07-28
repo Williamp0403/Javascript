@@ -82,7 +82,7 @@ console.log(nombre.toUpperCase());
 var nombre = "Juan";
 console.log(nombre.toLowerCase());
 
-// Tostring:  Convierte una cadena a String
+// Tostring: Convierte una cadena a String
 
 var cadena = ["pedro", "maria"];
 var resultado = cadena.toString();
@@ -222,7 +222,7 @@ console.log(array_reverse.join(" , "));
 // Slice: Devuelve una parte del array dentro de un nuevo array empezando por inicio hasta fin (fin no incluido).
 
 var frutas = ["Banana", "Orange", "Apple", "Mango", "Pera", "Cambur"]
-var resultado = frutas.slice(1, 3)
+var resultado = frutas.slice(0,-1)
 console.log(resultado);
 
 // Length: Retorna la longitud de un array.

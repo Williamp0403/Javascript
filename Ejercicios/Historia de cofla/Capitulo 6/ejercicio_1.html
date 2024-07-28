@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+    </div>
+
+    <form>
+        <input type="hidden" name="data" class="key-data">
+        <input type="submit" value="Comprar" class="send-button">
+    </form>
+</body>
+<script>
+    // Cofla se quedó encerrado en su casa porque se le rompio la llave, pero necesita ir urgente a la facultad porque no puede faltar ni una sola vez si quiere aprobar las materias que le faltan, ya que está al limite de asistencias, entonces tiene que llamar un cerrajero y pedirle que traiga la llave indicada, no hay tiempo suficiente como para que el cerrajero vea cual es la llave indicada, solo puede traer una y probar, entonces se cofla se da cuenta que es una llave antigua, por ende no hace falta afilarla, solo necesita decirle el modelo de llave para que el cerrrajero venga, pero cofla tiene tanta mala suerte que nisiquiera tiene internet para poder buscar, lo que si tiene es a un progamador que le hará un sistema para mostrarle las llaves posibles y determinar cual es la indicada, hay solo 20 modelos disponibles, permitir que cofla seleccione el indicado.
+
+    // CREAR SOLUCIONES:
+
+    // - Crear un sistema que le muestre a cofla las 20 llaves posibles, con sus 4 imagenes y cofla debe seleccionar cual llave elegir, una vez que cofla seleccionó la llave, encia los datos al servidor, otro programador se encargará del resto
+
+const contenedor = document.querySelector(".contenedor");
+
+function crearLlaves(nombre, modelo, precio){
+    img = `<img class="img-llave" src="llave.jpeg">`
+    nombre = `<h2>Llave ${nombre}</h2>`;
+    modelo = `<h3>Modelo: ${modelo}</h3>`;
+    precio = `<p>Precio: <b>${precio}</b></p>`;
+    return[img, nombre, modelo, precio];
+}
+
+
+const fragmento = document.createDocumentFragment();
+
+for(let i = 1; i <= 20; i++){
+    let modeloRandom = Math.round(Math.random()*10000);
+    let precioRamdon = Math.round(Math.random()*10 + 30);
+    let llave = crearLlaves(`${i}`, `${modeloRandom}`, `${precioRamdon}`);
+    let div = document.createElement("DIV");
+    div.addEventListener("click", ()=>{
+        document.querySelector(".key-data").value = modeloRandom;
+    });
+    div.classList.add(`items-${i}`, `flex-item`);
+    div.innerHTML = llave[0] + llave[1] + llave[2] + llave[3];
+    fragmento.appendChild(div);
+}
+
+contenedor.appendChild(fragmento);
+
+const botones = document.querySelectorAll(".flex-item");
+botones.forEach(function(boton){
+    boton.addEventListener("click",function() {
+        botones.forEach(function(b){
+            b.classList.remove('active')
+        });
+        this.classList.add('active');
+    })
+})
+
+
+</script>
+</html

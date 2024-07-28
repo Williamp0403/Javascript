@@ -3,84 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caluculadora Básica</title>
-    <style>
-        *{
-            color: white;
-        }
-
-        #box{
-            max-width: max-content;
-            margin: auto;
-            background-color: rgb(61, 65, 64);
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        #show{
-            width: auto;
-            height: 50px;
-            background-color: rgb(159, 160, 161);
-            border-radius: 10px;
-            margin-bottom: 10px;
-            padding: 0px 5px;
-            font-size: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: end;
-        }
-
-        button{
-            border-radius: 7px;
-            height: 70px;
-            width: 70px;
-            background-color: rgb(159, 160, 161);
-        }
-    </style>
+    <title>Calculadora Básica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div id="box">
-        <div id="show">
-            
-        </div>
-        <div>
-            <button>/</button>
-            <button class="numbers">7</button>
-            <button class="numbers">8</button>
-            <button class="numbers">9</button>
-            <button> --x </button>
-        </div>
-        <div>
-            <button>*</button>
-            <button class="numbers">4</button>
-            <button class="numbers">5</button>
-            <button class="numbers">6</button>
-            <button>Clear</button>
-        </div>
-        <div>
-            <button>-</button>
-            <button class="numbers">1</button>
-            <button class="numbers">2</button>
-            <button class="numbers">3</button>
-            <button>x2</button>
-        </div>
-        <div>
-            <button>+</button>
-            <button>,</button>
-            <button class="numbers">0</button>
-            <button>=</button>
-            <button>raiz</button>
-        </div>
+<body class="bg-gray-800">
+    <div class="w-[525px] mx-auto mt-20 bg-gray-900 p-3 flex flex-wrap justify-around items-center space-y-3 rounded-lg text-2xl font-bold select-none">
+        <div id="pantalla" class="flex justify-end items-center text-white text-4xl w-full mx-1 mt-1 h-[80px] bg-gray-800 rounded-[20px]">0</div>
+        <button class="boton mt-3 bg-gray-400 hover:bg-gray-500 text-white hover:shadow-white shadow-2xl rounded-[20px] w-[75px] h-[75px]">√</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">7</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">8</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">9</button>
+        <button id="borrar" class="boton group relative flex h-[75px] w-[75px] hover:shadow-white shadow-2xl flex-col items-center justify-center overflow-hidden rounded-[20px] bg-red-600 hover:bg-red-400">
+            <svg viewBox="0 0 1.625 1.625" class="absolute -top-7 fill-white delay-100 group-hover:top-6 group-hover:animate-[spin_1.4s  group-hover:duration-1000" height="15" width="15"><path d="M.471 1.024v-.52a.1.1 0 0 0-.098.098v.618c0 .054.044.098.098.098h.487a.1.1 0 0 0 .098-.099h-.39c-.107 0-.195 0-.195-.195"></path><path d="M1.219.601h-.163A.1.1 0 0 1 .959.504V.341A.033.033 0 0 0 .926.309h-.26a.1.1 0 0 0-.098.098v.618c0 .054.044.098.098.098h.487a.1.1 0 0 0 .098-.099v-.39a.033.033 0 0 0-.032-.033"></path><path d="m1.245.465-.15-.15a.02.02 0 0 0-.016-.006.023.023 0 0 0-.023.022v.108c0 .036.029.065.065.065h.107a.023.023 0 0 0 .023-.023.02.02 0 0 0-.007-.016"></path></svg><svg width="16" fill="none" viewBox="0 0 39 7" class="origin-right duration-500 group-hover:rotate-90"> <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line> <line stroke-width="3" stroke="white" y2="1.5" x2="26.0357" y1="1.5" x1="12"></line> </svg><svg width="16" fill="none" viewBox="0 0 33 39" class=""> <mask fill="white" id="path-1-inside-1_8_19"><path d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z"></path></mask><path mask="url(#path-1-inside-1_8_19)" fill="white" d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z"></path><path stroke-width="4" stroke="white" d="M12 6L12 29"></path><path stroke-width="4" stroke="white" d="M21 6V29"></path></svg>
+        </button> 
+        <button id="c" class="boton flex justify-center hover:shadow-white shadow-2xl items-center bg-red-600 hover:bg-red-400 text-white rounded-[20px] w-[75px] h-[75px]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 mr-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
+          </svg>
+        </button>
+        <button class="boton bg-gray-400 hover:bg-gray-500 text-white rounded-[20px] hover:shadow-white shadow-2xl w-[75px] h-[75px]">∛</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">4</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">5</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">6</button>
+        <button name="basicas" class="boton basicas bg-gray-400 hover:bg-gray-500 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">*</button>
+        <button name="basicas" class="boton basicas bg-gray-400 hover:bg-gray-500 text-white hover:shadow-white shadow-2xl rounded-[20px] w-[75px] h-[75px]">/</button>
+        <button class="boton bg-gray-400 hover:bg-gray-500 text-white hover:shadow-white shadow-2xl rounded-[20px] w-[75px] h-[75px]">^</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">1</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">2</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">3</button>
+        <button name="basicas" class="boton bg-gray-400 hover:bg-gray-500 text-white rounded-[20px] hover:shadow-white shadow-2xl w-[75px] h-[75px]">+</button>
+        <button name="negativo" class="boton bg-gray-400 hover:bg-gray-500 text-white rounded-[20px] hover:shadow-white shadow-2xl w-[75px] h-[75px]">-</button>
+        <button class="boton bg-gray-400 hover:bg-gray-500 text-white rounded-[20px] hover:shadow-white shadow-2xl w-[75px] h-[75px]">Ln</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">.</button>
+        <button class="boton bg-green-500 hover:bg-green-400 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[75px] h-[75px]">0</button>
+        <button id="igual" class="boton bg-violet-700 hover:bg-violet-500 hover:shadow-white shadow-2xl text-white rounded-[20px] w-[240px] h-[75px]">=</button>
     </div>
 </body>
-<script>
 
-    let numbers = document.querySelectorAll(".numbers");
-    numbers.forEach(function(button){
-        button.addEventListener("click", ()=>{
-            show = document.getElementById("show");
-            show.innerHTML += button.innerHTML;
+<script>
+    const numeros = document.querySelectorAll(".boton");
+    const pantalla = document.querySelector("#pantalla");
+    let operacion = "";;
+    let todo = "";
+
+    numeros.forEach(function(boton){
+        boton.addEventListener("click", ()=>{           
+            let botonSeleccionado = boton.textContent;
+            todo += boton.textContent; 
+            let ultimo = todo[todo.length-1];
+            let penultimo = todo[todo.length-2];
+
+            if(boton.id == "borrar"){
+                pantalla.textContent = "0";
+                return;
+            }
+
+            if(boton.id == "c"){
+                if(pantalla.textContent.length === 1 || pantalla.textContent === "Error!"){
+                    pantalla.textContent = "0";
+                }else{
+                    pantalla.textContent = pantalla.textContent.slice(0,-1);
+                }
+                return;
+            }
+
+            if(boton.name == "basicas"){
+                if(penultimo == "+" || penultimo == "*" || penultimo == "/"){
+                    pantalla.textContent = pantalla.textContent.slice(0,-1);
+                }
+            }
+
+            if(boton.name == "negativo"){
+                if(penultimo == "-"){
+                    pantalla.textContent = pantalla.textContent.slice(0,-1);
+                }
+            }
+
+            if(boton.id == "igual"){
+                try {
+                    if(pantalla.textContent[0] == "√"){
+                        pantalla.textContent = eval(Math.sqrt(pantalla.textContent.slice(1)));
+                    }else if(pantalla.textContent[0] == "∛"){
+                        pantalla.textContent = eval(Math.sqrt(pantalla.textContent.slice(1)));
+                    }else if(pantalla.textContent.includes("^")){
+                        for(num of pantalla.textContent){
+                            operacion += (num == "^") ? "**" : num;
+                        }
+                        pantalla.textContent = eval(operacion);
+                        operacion = "";
+                    }else if(pantalla.textContent.includes("Ln")){
+                        pantalla.textContent = eval(Math.log(pantalla.textContent.slice(2)));
+                    } else{
+                        pantalla.textContent = eval(pantalla.textContent);
+                    }
+                } catch {
+                    pantalla.textContent = "Error!";
+                }
+                return;
+            }
+
+            if(pantalla.textContent === "0" || pantalla.textContent == "Error!"){
+                pantalla.textContent = botonSeleccionado;
+            } else{
+                pantalla.textContent += botonSeleccionado; 
+            }
         })
     })
+
 </script>
+
 </html>

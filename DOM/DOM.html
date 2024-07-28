@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .add{
+            color: white;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="contenteditable">Este es un titulo con contentEditable</h1>
+    <h1 class="dir">Este es un titulo con dir</h1>
+    <h1 class="hidden">Este es un titulo con hidden</h1>
+    <h1 class="style"style="padding: 20px;">Este es un titulo con style</h1>
+    <a class="tabindex">Este es un elemento a con tabindex</a>
+    <h1 class="title">Este es un titulo con title</h1>
+    <input type="text" class="input-className" value="hola">
+    <input type="file" class="input-file">
+    <form>
+        <input type="text" class="minlength">
+        <input type="submit">
+    </form>
+    <h1 class="classList">Este es un titulo con add()</h1>
+    <h1 class="remove">Este es un titulo con remove()</h1>
+    <h1 class="toggle hola">Este es un titulo con toggle()</h1>
+    <h1 class="replace weje">Este es un titulo con replace()</h1>
+    <p class="text">Este es un titulo a <b style="visibility: hidden;">Modificar</b></p>
+</body>
+<script>
+
+// ----- Nodo ----- ///
+
+// Un nodo en el DOM es cualquier etiqueta del cuerpo, como un parrafo, el mismo body o incluso las etiquetas de una lista.
+
+// - Document: el nodo document es el nodo raiz, a partir del cual derivan el resto de nodos.
+// - Element: nodos definidos por etiquetas html.
+// - Text: el texto dentro de un nodo element se considera un nuevo nodo hijo de tipo text (texto).
+// - Atributte: los atributos de las etiquetas definen nodos, (en JavaScript no los veremos como nodos, sino como informacion asociada al nodo de tipo element).
+// Comentarios y otros: los comentarios y otros elementos como las declaraciones doctype en cabecera de los documentos HTML generan nodos.
+
+// ----- Document - Metodos de selección de elementos ----- //
+
+// - getElementById(): selecciona un elemento por ID.
+// - getElementsByTagName(): selecciona todos los elementos que coincidan con el nombre de la etiqueta especificada.
+// - querySelector(): devuelve el primer elemento que coincida con el grupo especificado de selectores.
+// - querySelectorAll(): devuelve todos los elementos que coincidan con el grupo especificado de selectores.
+
+// ----- Metodos para Definir, Obtener y Eliminar atributos.
+
+// - setAttribute(): Modifica el valor de un atributo.
+// - getAttribute(): Obtiene el valor de un atributo.
+// - removeAttribute(): Remueve el valor de un atributo.
+
+// ----- Atributos globales ----- //
+
+// - contenteditable: indica si el elemento puede ser modificado por el usuario (bool).
+
+const contenteditable = document.querySelector(".contenteditable");
+contenteditable.setAttribute("contenteditable", true);
+
+// - dir: indica la direccionalidad del texto.
+
+const dir = document.querySelector(".dir");
+dir.setAttribute("dir", "rtl");
+
+// - hidden: indica si el elemento aun no es, o ya no es, relevante (asi sea true o false, funciona).
+
+const hidden = document.querySelector(".hidden");
+hidden.setAttribute("hidden", false);
+
+// - style: contiene declaraciones de estilo CSS para ser aplicados al elemento.
+
+const style = document.querySelector(".style");
+style.setAttribute("style", "color: red");
+
+// - tabindex: indica si el elemento puede obtener un focus de input.
+
+const tabindex = document.querySelector(".tabindex");
+tabindex.setAttribute("tabindex", "0");
+
+// - title: contiene un texto con informacion relacionada al elemento al que pertenece.
+
+const title = document.querySelector(".title");
+title.setAttribute("title", "titulo");
+
+// ----- Atributos de Inputs ----- //
+
+// - className
+
+const input1 = document.querySelector(".input-className");
+
+document.write("<br>ClassName: " + input1.className + "<br>");
+
+// - value
+
+document.write("Value: " + input1.value + "<br>")
+
+// - type
+
+document.write("Type: " + input1.type);
+
+// - accept
+
+const input2 = document.querySelector(".input-file");
+input2.accept = "image/png";
+
+// - minlength
+
+const input3 = document.querySelector(".minlength");
+input3.minLength = 4;
+
+// - placeholder
+
+input3.placeholder = "Escribe aqui";
+
+// - required
+
+input3.required = false;
+
+// ----- Clases, classList y Metodos de classList ----- //
+
+// - add(): añade una clase.
+
+const add = document.querySelector(".classList");
+add.classList.add("add");
+
+// - remove(): remueve una clase.
+
+const remove = document.querySelector(".remove");
+remove.classList.remove("remove");
+
+// - item(): devuelve la clase del indice especificado.
+
+let valor = add.classList.item(1);
+console.log(valor);
+
+// - contains(): verifica si ese elemento posee o no, la clase especificada.
+
+let contains = add.classList.contains("classList");
+console.log(contains);
+
+// - replace(): reemplaza una clase por otra. (si existe la clase, devuelve true, si no existe, devuelve false)
+
+const replace = document.querySelector(".replace");
+replace.classList.replace("weje", "mango");
+
+// - toggle(): si no tiene la clase especificada, la agrega, si ya la tiene, la elimina. (devuelve false si existe la clase, si no existe, devuelve true)
+
+const toggle = document.querySelector(".toggle");
+toggle.classList.toggle("hola");
+
+// ----- Obtencion y Modificacion de Elementos ----- //
+
+// - textContent: devuelve el texto de cualquier nodo. (Muestra todo el texto del elemento, sin importar los estilos o etiquetas que haya dentro, asi la etiqueta tenga hidden)
+
+const titulo1 = document.querySelector(".text");
+let resTitulo1 = titulo1.textContent;
+console.log("textContent: " + resTitulo1);
+
+// - innerText: devuelve el texto visible de un node element. (texto interior).
+
+let resTitulo2 = titulo1.innerText;
+console.log("innerText: " + resTitulo2);
+
+// - innerHTML: devuelve el contenido html de un elemento. (HTML interno).
+
+let resTitulo3 = titulo1.innerHTML;
+console.log(resTitulo3);
+
+// - outerHTML: devuelve el codigo HTML completo del elemento. (HTML externo).
+
+let resTitulo4 = titulo1.outerHTML;
+console.log(resTitulo4);
+
+</script>
+</html>
+
+ 
